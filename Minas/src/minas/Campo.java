@@ -41,6 +41,8 @@ public class Campo {
      * 
      */
     public  void leerCuadrosDeEntrada(int N, int M){
+        if (N == 0 && M == 0)
+            return;
         cuadros = new char[N][M];
         Scanner entrada = new Scanner(System.in);
         
@@ -73,11 +75,14 @@ public class Campo {
     }
 
     @Override
-    public String toString() {   
+    public String toString() {
+        if ( cuadros == null )
+            return "";
         String string = new String();   
-        for (int i = 0; i<cuadros.length; i++){
-            for(int j=0; j< cuadros[0].length; j++)
-                string+= (char) (cuadros[i][j] + '0');
+        for (char[] cuadro : cuadros) {
+            for (int j = 0; j< cuadros[0].length; j++) {
+                string += (char) (cuadro[j] + '0');
+            }
             string+='\n';
         }
         return string;
