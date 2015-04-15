@@ -63,18 +63,13 @@ public class Campo {
     private void actualizarAdyacentes(int y, int x){
         for (int i=y-1; i<=y+1; i++){
             for(int j=x-1; j<=x+1; j++){
-                if(i==y && j==x){
-                    cuadros[i][j] = (char) ('*'-'0');
-                    break;
-                }
                 if( (0 <= i && i< cuadros.length) && (0<=j && j < cuadros[0].length) ){
                     if(cuadros[i][j] != (char)('*'-'0'))
                         cuadros[i][j]++;
                 }
-                    
             }
         }
-        
+        cuadros[y][x] = (char) ('*'-'0');
     }
 
     @Override
