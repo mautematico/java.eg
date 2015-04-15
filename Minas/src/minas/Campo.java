@@ -41,7 +41,7 @@ public class Campo {
      * 
      */
     public  void leerCuadrosDeEntrada(int N, int M){
-        if (N == 0 && M == 0)
+        if (N <= 0 || M <= 0)
             return;
         cuadros = new char[N][M];
         Scanner entrada = new Scanner(System.in);
