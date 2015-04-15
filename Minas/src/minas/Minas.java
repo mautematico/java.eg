@@ -17,17 +17,28 @@
  */
 package minas;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Mauricio Navarro Miranda <mauricio@navarromiranda.mx>
  */
 public class Minas {
     public static void main(String b[]){
-        Campo campo = new Campo();
+        Scanner entrada = new Scanner(System.in);
+        Campo campo;
+        int i = 0;
+        int N,M;
         
-        campo.leerCuadrosDeEntrada(3,6);
-        System.out.println(campo);
-    }
-    
-    
+        do{
+            N = entrada.nextInt();
+            M = entrada.nextInt();
+            
+            
+            campo = new Campo();
+            campo.leerCuadrosDeEntrada(N,M);
+            System.out.println("Campo minado #" + ++i +":");
+            System.out.println(campo);            
+        }while(N!= 0 || M!=0);
+    }    
 }
