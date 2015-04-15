@@ -30,7 +30,7 @@ public class Campo {
      * 
      * Minas guardadas como '*'+'0'
      * No-adyacentes a minas guardados como 0
-     * Adyacentes a minas guardados como 'K'
+     * Adyacentes a minas guardados como K
      */
     private char[][] cuadros;
     
@@ -73,11 +73,8 @@ public class Campo {
     }
 
     @Override
-    public String toString() {
-        
-   //     char[][] stringss = new Char[cuadros.lenght][cuadros[0].length];
-        String string = new String();
-        
+    public String toString() {   
+        String string = new String();   
         for (int i = 0; i<cuadros.length; i++){
             for(int j=0; j< cuadros[0].length; j++)
                 string+= (char) (cuadros[i][j] + '0');
@@ -85,6 +82,4 @@ public class Campo {
         }
         return string;
     }
-    
-    
 }
