@@ -29,8 +29,9 @@ public class CSV {
             String linea;
             String fechaString;
             
-            int leidos = 0;
-            long promedio = 0;
+            Integer leidos;
+            leidos = 0;
+            Long promedio = (long) 0;
             
 
             FileReader fr = new FileReader("entrada.csv");
@@ -47,8 +48,8 @@ public class CSV {
                 fechaString = entradas[1];
                 fecha = new Fecha(fechaString);
                 
-                procesarFecha(fecha, fechaAnterior, leidos, promedio);
-                
+                System.out.println(procesarFecha(fecha, fechaAnterior, leidos, promedio));
+                leidos++;
              }
             
 
@@ -58,8 +59,15 @@ public class CSV {
         }    
     }
     
-    private static void procesarFecha(Fecha fecha, Fecha fechaAnterior, int leidos, long promedio){
+    private static String procesarFecha(Fecha fecha, Fecha fechaAnterior, Integer leidos, Long promedio){
+        if(fechaAnterior == null){
+            promedio = fecha.getEpochSegundos();
+            return "|"+fecha.getEpochSegundos()+"|"+promedio+"|"+promedio;
+        }
+        promedio = (promedio*(leidos/(leidos+1)))                + fecha.getEpochSegundos()/(leidos+1);
+        int diferencia = (int) (fecha.getEpochSegundos() - fechaAnterior.getEpochSegundos());
         
+        return "|"+fecha.getEpochSegundos()+"|"+diferencia+"|"+promedio;
         
         
     }
