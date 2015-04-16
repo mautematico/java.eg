@@ -39,7 +39,7 @@ public class CSV {
             
 
             while((linea = br.readLine()) != null){
-                String entradas[] = linea.split((String)"|");
+                String entradas[] = linea.split("\\|");
                 
                 int ID;
                 ID = Integer.parseInt(entradas[0]);           
