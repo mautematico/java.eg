@@ -27,9 +27,13 @@ public class CSV {
     
 
     /**
-     * 
+     * En el primer parámetro, recibe el nombre/ruta del fichero de entrada.
+     * Por defecto es Archivo1.csv
      * @param args the command line arguments
      * @throws java.io.IOException
+     * 
+     * Lee, línea por linea, el fichero de entrada y procesa las fechas en la misma.
+     * También, linea por linea, escribe las lineas procesadas a ArchivoFinal.csv
      */
     public static void main(String[] args) throws IOException {
         String entrada;
@@ -75,7 +79,8 @@ public class CSV {
      * @param fecha la nueva fecha leida
      * @param fechaAnterior la fecha anterior, para calcular la diferencia
      * @return String que contiene |epoch|diferencia|promedio
-     * TODO     Dar formato al promedio (incluir un decimal de precisión)
+     * TODO:     Dar formato al promedio (incluir un decimal de precisión)
+     * TODO:     Prevenir que suma se desborde. Hint: No usar suma, y sólo manipular (cuidadosamente) promedio.
      */
     private static String procesarFecha(Fecha fecha, Fecha fechaAnterior){
         if(fechaAnterior == null){
