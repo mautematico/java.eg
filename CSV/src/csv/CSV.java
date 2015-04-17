@@ -27,16 +27,27 @@ public class CSV {
     
 
     /**
+     * 
      * @param args the command line arguments
      * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
+        String entrada;
+        
+        if(args.length>0){
+            entrada=args[0];
+        }
+        else{
+            entrada = "Archivo1.csv";
+        }
+            
+        
         try {
             Fecha fecha = null, fechaAnterior = null;
             String linea;
             String fechaString;
             
-            FileReader fr = new FileReader("entrada.csv");
+            FileReader fr = new FileReader(entrada);
             BufferedReader br = new BufferedReader(fr);
             PrintWriter archivoFinal = new PrintWriter(new FileWriter("ArchivoFinal.csv"));            
 
