@@ -8,7 +8,9 @@ package csv;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +20,11 @@ import java.util.logging.Logger;
  * @author Mauricio Navarro Miranda <mauricio@navarromiranda.mx>
  */
 public class CSV {
+           
+    private static Long leidos =(long) 0;
+    private static Long suma = (long) 0;
+    private static Long promedio = (long) 0;
+    
 
     /**
      * @param args the command line arguments
@@ -29,14 +36,9 @@ public class CSV {
             String linea;
             String fechaString;
             
-            Integer leidos;
-            leidos = 0;
-            Long promedio = (long) 0;
-            
-
             FileReader fr = new FileReader("entrada.csv");
             BufferedReader br = new BufferedReader(fr);
-            
+            PrintWriter archivoFinal = new PrintWriter(new FileWriter("ArchivoFinal.csv"));            
 
             while((linea = br.readLine()) != null){
                 String entradas[] = linea.split("\\|");
@@ -48,28 +50,33 @@ public class CSV {
                 fechaString = entradas[1];
                 fecha = new Fecha(fechaString);
                 
-                System.out.println(procesarFecha(fecha, fechaAnterior, leidos, promedio));
+                String salida = linea + procesarFecha(fecha, fechaAnterior);
+                archivoFinal.println(salida);
                 leidos++;
              }
-            
-
-            
+            archivoFinal.close();
         } catch (ParseException | FileNotFoundException ex) {
             Logger.getLogger(CSV.class.getName()).log(Level.SEVERE, null, ex);
         }    
     }
-    
-    private static String procesarFecha(Fecha fecha, Fecha fechaAnterior, Integer leidos, Long promedio){
+    /**
+     * 
+     * @param fecha la nueva fecha leida
+     * @param fechaAnterior la fecha anterior, para calcular la diferencia
+     * @return String que contiene |epoch|diferencia|promedio
+     * TODO     Dar formato al promedio (incluir un decimal de precisión)
+     */
+    private static String procesarFecha(Fecha fecha, Fecha fechaAnterior){
         if(fechaAnterior == null){
             promedio = fecha.getEpochSegundos();
+            suma = fecha.getEpochSegundos();
             return "|"+fecha.getEpochSegundos()+"|"+promedio+"|"+promedio;
         }
-        promedio = (promedio*(leidos/(leidos+1)))                + fecha.getEpochSegundos()/(leidos+1);
+        suma+=fecha.getEpochSegundos();
+        promedio = (suma/(leidos+1));
+//        promedio = (promedio*( leidos/(leidos+1) )) + fecha.getEpochSegundos()/(leidos+1);
         int diferencia = (int) (fecha.getEpochSegundos() - fechaAnterior.getEpochSegundos());
-        
-        return "|"+fecha.getEpochSegundos()+"|"+diferencia+"|"+promedio;
-        
-        
+        return "|"+fecha.getEpochSegundos()+"|"+diferencia+"|"+promedio;        
     }
     
 }
